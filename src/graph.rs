@@ -1,5 +1,7 @@
 pub mod bfs;
 
+pub use bfs::*;
+
 pub type NodeIdx = usize;
 pub type EdgeIdx = usize;
 
