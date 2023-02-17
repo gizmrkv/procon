@@ -1,5 +1,7 @@
+mod ds;
 mod total_ord;
 
+pub use ds::*;
 pub use total_ord::*;
 
 #[doc(hidden)]
