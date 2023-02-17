@@ -1,6 +1,6 @@
 use std::collections::VecDeque;
 
-use crate::graph::*;
+use super::*;
 
 /// Breadth First Search
 #[derive(Debug, Default)]
