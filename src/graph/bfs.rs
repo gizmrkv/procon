@@ -67,8 +67,8 @@ impl BFS {
     ///     assert_eq!(through[3], None);
     /// }
     /// ```
-    pub fn with_graph<D>(graph: &Graph<D>, root: NodeIdx) -> BFS {
-        let mut algo = BFS::default();
+    pub fn with_graph<D>(graph: &Graph<D>, root: NodeIdx) -> Self {
+        let mut algo = Self::default();
         algo.read(graph, root);
         algo
     }
