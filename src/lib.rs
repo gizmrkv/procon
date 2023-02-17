@@ -1,3 +1,7 @@
+mod total_ord;
+
+pub use total_ord::*;
+
 #[doc(hidden)]
 pub use std::io::*;
 
