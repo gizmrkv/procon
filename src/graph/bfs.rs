@@ -14,21 +14,21 @@ pub struct BFS {
 impl BFS {
     /// Get root node.
     ///
-    /// **Complexity** `O(E)`
+    /// **Complexity** `O(1)`
     pub fn root(&self) -> NodeIdx {
         self.root
     }
 
     /// Get path distance.
     ///
-    /// **Complexity** `O(E)`
+    /// **Complexity** `O(1)`
     pub fn distance(&self) -> &Vec<Option<usize>> {
         &self.distance
     }
 
     /// Get path through.
     ///
-    /// **Complexity** `O(E)`
+    /// **Complexity** `O(1)`
     pub fn through(&self) -> &Vec<Option<EdgeIdx>> {
         &self.through
     }
