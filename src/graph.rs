@@ -1,6 +1,8 @@
 pub mod bfs;
+pub mod dijkstra;
 
 pub use bfs::*;
+pub use dijkstra::*;
 
 pub type NodeIdx = usize;
 pub type EdgeIdx = usize;
@@ -136,6 +138,13 @@ impl<D> Graph<D> {
     /// **Complexity** `O(1)`
     pub fn n_edges(&self) -> usize {
         self.edges.len()
+    }
+
+    /// Get edges.
+    ///
+    /// **Complexity** `O(1)`
+    pub fn edges(&self) -> &Vec<Edge> {
+        &self.edges
     }
 }
 
