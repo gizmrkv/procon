@@ -1,7 +1,8 @@
-mod ds;
+pub mod ds;
+pub mod graph;
+
 mod total_ord;
 
-pub use ds::*;
 pub use total_ord::*;
 
 #[doc(hidden)]
