@@ -13,7 +13,7 @@ impl DSU {
     /// # Examples
     ///
     /// ```
-    /// use procon::DSU;
+    /// use procon::ds::DSU;
     /// let mut dsu = DSU::new();
     /// ```
     pub fn new() -> Self {
@@ -25,7 +25,7 @@ impl DSU {
     /// # Examples
     ///
     /// ```
-    /// use procon::DSU;
+    /// use procon::ds::DSU;
     /// let mut dsu = DSU::with_capacity(4);
     /// dsu.merge(0, 3);
     /// ```
@@ -44,7 +44,7 @@ impl DSU {
     /// # Example
     ///
     /// ```
-    /// use procon::DSU;
+    /// use procon::ds::DSU;
     /// let mut dsu = DSU::with_capacity(4);
     /// dsu.merge(0, 3);
     /// assert_eq!(dsu.root(0), dsu.root(3));
@@ -70,7 +70,7 @@ impl DSU {
     /// # Example
     ///
     /// ```
-    /// use procon::DSU;
+    /// use procon::ds::DSU;
     /// let mut dsu = DSU::with_capacity(4);
     /// dsu.merge(0, 3);
     /// assert_eq!(dsu.root(0), dsu.root(3));
@@ -99,7 +99,7 @@ impl DSU {
     /// # Example
     ///
     /// ```
-    /// use procon::DSU;
+    /// use procon::ds::DSU;
     /// let mut dsu = DSU::with_capacity(4);
     /// dsu.merge(0, 3);
     /// assert_eq!(dsu.root(0), dsu.root(3));
@@ -133,7 +133,7 @@ impl DSU {
     /// # Example
     ///
     /// ```
-    /// use procon::DSU;
+    /// use procon::ds::DSU;
     /// let mut dsu = DSU::with_capacity(4);
     /// dsu.merge(0, 3);
     /// assert_eq!(dsu.same(0, 3), Some(true));
@@ -155,7 +155,7 @@ impl DSU {
     /// # Example
     ///
     /// ```
-    /// use procon::DSU;
+    /// use procon::ds::DSU;
     /// let mut dsu = DSU::with_capacity(4);
     /// dsu.merge(0, 3);
     /// assert_eq!(dsu.same_mut(0, 3), Some(true));
@@ -177,7 +177,7 @@ impl DSU {
     /// # Example
     ///
     /// ```
-    /// use procon::DSU;
+    /// use procon::ds::DSU;
     /// let mut dsu = DSU::with_capacity(4);
     /// dsu.merge(0, 3);
     /// assert_eq!(dsu.size(0), Some(2));
@@ -200,7 +200,7 @@ impl DSU {
     /// # Example
     ///
     /// ```
-    /// use procon::DSU;
+    /// use procon::ds::DSU;
     /// let mut dsu = DSU::with_capacity(4);
     /// dsu.merge(0, 3);
     /// assert_eq!(dsu.size_mut(0), Some(2));
@@ -221,7 +221,7 @@ impl DSU {
     /// # Example
     ///
     /// ```
-    /// use procon::DSU;
+    /// use procon::ds::DSU;
     /// let mut dsu = DSU::with_capacity(4);
     /// dsu.merge(0, 3);
     /// assert_eq!(dsu.groups(), vec![vec![1], vec![2], vec![0, 3]]);
@@ -242,7 +242,7 @@ impl DSU {
     /// # Example
     ///
     /// ```
-    /// use procon::DSU;
+    /// use procon::ds::DSU;
     /// let mut dsu = DSU::with_capacity(4);
     /// dsu.merge(0, 3);
     /// assert_eq!(dsu.groups_mut(), vec![vec![1], vec![2], vec![0, 3]]);
