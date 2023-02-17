@@ -152,11 +152,12 @@ impl DiGraph {
     /// Add the directed edge.
     ///
     /// **Complexity** `O(1)`
-    pub fn add_edge(&mut self, edge: Edge) {
+    pub fn add_edge(&mut self, edge: Edge) -> EdgeIdx {
         let edge_idx = self.edges.len();
         self.nodes[edge.source].out_edges.push((edge, edge_idx));
         self.nodes[edge.target].in_edges.push((edge, edge_idx));
         self.edges.push(edge);
+        edge_idx
     }
 }
 
@@ -164,7 +165,7 @@ impl UnGraph {
     /// Add the undirected edge.
     ///
     /// **Complexity** `O(1)`
-    pub fn add_edge(&mut self, edge: Edge) {
+    pub fn add_edge(&mut self, edge: Edge) -> EdgeIdx {
         let edge_idx = self.edges.len();
 
         self.nodes[edge.source].out_edges.push((edge, edge_idx));
@@ -178,5 +179,7 @@ impl UnGraph {
             .push((edge.reverse(), edge_idx));
 
         self.edges.push(edge);
+
+        edge_idx
     }
 }
