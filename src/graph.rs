@@ -101,7 +101,7 @@ impl<D> Graph<D> {
         }
     }
 
-    /// Create the graph with the number of nodes and edges.
+    /// Create the graph with the number of nodes.
     ///
     /// **Complexity** `O(1)`
     pub fn with_nodes(n_nodes: usize) -> Self {
@@ -159,6 +159,17 @@ impl DiGraph {
         self.edges.push(edge);
         edge_idx
     }
+
+    /// Create the graph with the number of nodes and edges.
+    ///
+    /// **Complexity** `O(1)`
+    pub fn with_edges(n_nodes: usize, edges: impl Iterator<Item = Edge>) -> Self {
+        let mut graph = Self::with_nodes(n_nodes);
+        for edge in edges {
+            graph.add_edge(edge);
+        }
+        graph
+    }
 }
 
 impl UnGraph {
@@ -181,5 +192,16 @@ impl UnGraph {
         self.edges.push(edge);
 
         edge_idx
+    }
+
+    /// Create the graph with the number of nodes and edges.
+    ///
+    /// **Complexity** `O(1)`
+    pub fn with_edges(n_nodes: usize, edges: impl Iterator<Item = Edge>) -> Self {
+        let mut graph = Self::with_nodes(n_nodes);
+        for edge in edges {
+            graph.add_edge(edge);
+        }
+        graph
     }
 }
