@@ -97,8 +97,10 @@ impl<T: Default + PartialEq + PartialOrd + Clone + Copy + From<i32> + Add<Output
 
         self.distance[root] = Some(T::from(0));
         for (edge, edge_idx) in graph.out_edges(root).cloned() {
-            self.next
-                .push((Reverse(TotalOrd(edge_distance(edge_idx))), edge));
+            let dist = edge_distance(edge_idx);
+            self.distance[edge.target] = Some(dist);
+            self.through[edge.target] = Some(edge_idx);
+            self.next.push((Reverse(TotalOrd(dist)), edge));
         }
 
         while let Some((Reverse(TotalOrd(dist)), curr)) = self.next.pop() {
