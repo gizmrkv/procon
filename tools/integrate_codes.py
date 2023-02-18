@@ -1,7 +1,14 @@
 import glob
 import os
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--main_path", type=str)
+
+args = parser.parse_args()
 
 paths = [path for path in glob.glob("src/**", recursive=True) if os.path.isfile(path)]
+paths.append(args.main_path)
 out_path = "integrated.rs"
 
 use_libs = ["std::io::*", "std::collections::*", "std::cmp::*", "std::ops::*"]
