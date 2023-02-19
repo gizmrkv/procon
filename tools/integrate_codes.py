@@ -18,6 +18,9 @@ test_flag = "#[cfg(test)]\n"
 with open(out_path, mode="w", encoding="utf-8") as out_file:
     out_file.writelines([f"use {lib};\n" for lib in use_libs])
     for path in paths:
+        if "/bin/" in path:
+            continue
+
         with open(path, mode="r", encoding="utf-8") as file:
             lines = file.readlines()
             if test_flag in lines:
