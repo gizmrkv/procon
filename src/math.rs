@@ -1,4 +1,4 @@
-mod gcd;
+pub mod gcd;
 
 use std::ops::*;
 
