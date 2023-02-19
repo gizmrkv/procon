@@ -17,7 +17,8 @@ pub fn gcd<T: Num>(mut a: T, mut b: T) -> T {
         if r == T::zero() {
             break b;
         }
-        (a, b) = (b, r)
+        a = b;
+        b = r;
     }
 }
 
@@ -40,8 +41,12 @@ pub fn extgcd<T: Num>(mut a: T, mut b: T) -> (T, T) {
         let c = a - b * temp;
         let xc = xa - xb * temp;
         let yc = ya - yb * temp;
-        (a, xa, ya) = (b, xb, yb);
-        (b, xb, yb) = (c, xc, yc);
+        a = b;
+        xa = xb;
+        ya = yb;
+        b = c;
+        xb = xc;
+        yb = yc;
     }
     (xb, yb)
 }
