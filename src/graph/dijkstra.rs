@@ -104,23 +104,22 @@ impl<T: Default + PartialEq + PartialOrd + Clone + Copy + From<i32> + Add<Output
         }
 
         let edges = graph.edges();
-
         while let Some((Reverse(TotalOrd(dist)), curr)) = self.next.pop() {
             if let Some(prev_dist) = self.distance[edges[curr].target] {
                 if prev_dist < dist {
                     continue;
                 }
             }
-            for (next, next_id) in graph.out_edges(edges[curr].target) {
-                let next_dist = dist + edge_distance(*next_id);
+            for (next, next_idx) in graph.out_edges(edges[curr].target) {
+                let next_dist = dist + edge_distance(*next_idx);
                 if let Some(prev_dist) = self.distance[next.target] {
                     if prev_dist <= next_dist {
                         continue;
                     }
                 }
                 self.distance[next.target] = Some(next_dist);
-                self.through[next.target] = Some(*next_id);
-                self.next.push((Reverse(TotalOrd(next_dist)), *next_id));
+                self.through[next.target] = Some(*next_idx);
+                self.next.push((Reverse(TotalOrd(next_dist)), *next_idx));
             }
         }
     }
