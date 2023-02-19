@@ -9,7 +9,7 @@ pub struct Dijkstra<T: PartialEq + PartialOrd> {
     root: NodeIdx,
     distance: Vec<Option<T>>,
     through: Vec<Option<EdgeIdx>>,
-    next: BinaryHeap<(Reverse<TotalOrd<T>>, Edge)>,
+    next: BinaryHeap<(Reverse<TotalOrd<T>>, EdgeIdx)>,
 }
 
 impl<T: Default + PartialEq + PartialOrd + Clone + Copy + From<i32> + Add<Output = T>> Dijkstra<T> {
@@ -96,29 +96,31 @@ impl<T: Default + PartialEq + PartialOrd + Clone + Copy + From<i32> + Add<Output
         self.through.resize(graph.n_nodes(), None);
 
         self.distance[root] = Some(T::from(0));
-        for (edge, edge_idx) in graph.out_edges(root).cloned() {
-            let dist = edge_distance(edge_idx);
+        for (edge, edge_idx) in graph.out_edges(root) {
+            let dist = edge_distance(*edge_idx);
             self.distance[edge.target] = Some(dist);
-            self.through[edge.target] = Some(edge_idx);
-            self.next.push((Reverse(TotalOrd(dist)), edge));
+            self.through[edge.target] = Some(*edge_idx);
+            self.next.push((Reverse(TotalOrd(dist)), *edge_idx));
         }
 
+        let edges = graph.edges();
+
         while let Some((Reverse(TotalOrd(dist)), curr)) = self.next.pop() {
-            if let Some(prev_dist) = self.distance[curr.target] {
+            if let Some(prev_dist) = self.distance[edges[curr].target] {
                 if prev_dist < dist {
                     continue;
                 }
             }
-            for (next, next_id) in graph.out_edges(curr.target).cloned() {
-                let next_dist = dist + edge_distance(next_id);
+            for (next, next_id) in graph.out_edges(edges[curr].target) {
+                let next_dist = dist + edge_distance(*next_id);
                 if let Some(prev_dist) = self.distance[next.target] {
                     if prev_dist <= next_dist {
                         continue;
                     }
                 }
                 self.distance[next.target] = Some(next_dist);
-                self.through[next.target] = Some(next_id);
-                self.next.push((Reverse(TotalOrd(next_dist)), next));
+                self.through[next.target] = Some(*next_id);
+                self.next.push((Reverse(TotalOrd(next_dist)), *next_id));
             }
         }
     }
