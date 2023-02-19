@@ -8,7 +8,7 @@ pub struct BFS {
     root: NodeIdx,
     distance: Vec<Option<usize>>,
     through: Vec<Option<EdgeIdx>>,
-    next: VecDeque<NodeIdx>,
+    next: VecDeque<EdgeIdx>,
 }
 
 impl BFS {
@@ -86,21 +86,20 @@ impl BFS {
         self.through.resize(graph.n_nodes(), None);
 
         self.distance[root] = Some(0);
-        self.next.push_back(root);
+        for (edge, edge_idx) in graph.out_edges(root) {
+            self.distance[edge.target] = Some(1);
+            self.through[edge.target] = Some(*edge_idx);
+            self.next.push_back(*edge_idx);
+        }
+
+        let edges = graph.edges();
 
         while let Some(curr) = self.next.pop_front() {
-            for (
-                Edge {
-                    source: _,
-                    target: t,
-                },
-                id,
-            ) in graph.out_edges(curr).cloned()
-            {
-                if self.distance[t].is_none() {
-                    self.distance[t] = Some(1 + self.distance[curr].unwrap());
-                    self.through[t] = Some(id);
-                    self.next.push_back(t);
+            for (edge, edge_idx) in graph.out_edges(edges[curr].target) {
+                if self.distance[edge.target].is_none() {
+                    self.distance[edge.target] = Some(1 + self.distance[edge.source].unwrap());
+                    self.through[edge.target] = Some(*edge_idx);
+                    self.next.push_back(*edge_idx);
                 }
             }
         }
